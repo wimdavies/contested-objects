@@ -11,7 +11,14 @@ class MuseumObjectsController < ApplicationController
   
   def search
     response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{params[:system_number]}", format: :plain)
-    @result = JSON.parse response.body, symbolize_names: true, object_class: OpenStruct
+
+    if response.success?
+      @result = JSON.parse response.body, symbolize_names: true, object_class: OpenStruct
+    else
+      @museum_objects = MuseumObject.all
+      flash.now[:alert] = "Object not found"
+      render :index, status: :not_found
+    end
   end
 
   # def new
