@@ -1,0 +1,17 @@
+<h1>Contested Objects</h1>
+
+<h2>Search the V&A Collection for a museum object</h2>
+<%= form_with url: search_path, method: :get do |form| %>
+  <%= form.label :system_number, "Search by system number:" %>
+  <%= form.text_field :system_number %>
+  <%= form.submit "Search" %>
+<% end %>
+
+<h2>Saved museum objects</h2>
+<ul>
+  <% @museum_objects.each do |museum_object| %>
+  <li>
+    <%= museum_object.system_number %>
+  </li>
+  <% end %>
+</ul>
