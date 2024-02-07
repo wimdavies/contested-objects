@@ -40,3 +40,8 @@
     <%= @result.record.productionDates.empty? ? "n/a" : @result.record.productionDates[0].date.text %>
   </dd>
 </dl>
+
+<%= form_with model: @museum_object, url: museum_objects_path, method: :post do |form| %>
+  <%= form.hidden_field :system_number, value: @result.record.systemNumber %>
+  <%= form.submit "Save this object" %>
+<% end %>
