@@ -11,6 +11,14 @@
   </head>
 
   <body>
+    <nav>
+      <ul>
+        <li>
+          <%= link_to "Home", root_path %>
+        </li>
+      </ul>
+    </nav>
+    
     <% if flash.any? %>
       <% flash.each do |type, msg| %>
         <div>
