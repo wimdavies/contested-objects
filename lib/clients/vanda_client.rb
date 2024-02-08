@@ -1,5 +1,5 @@
+require 'httparty'
+
 class VandaClient
-  # def initialize
-    
-  # end
+  include HTTParty
 end
