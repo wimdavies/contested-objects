@@ -116,6 +116,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    language_server-protocol (3.17.0.3)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -153,6 +154,7 @@ GEM
     nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     pg (1.5.4)
+    prism (0.21.0)
     psych (5.1.2)
       stringio
     public_suffix (5.0.4)
@@ -219,7 +221,20 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-support (3.13.0)
+    ruby-lsp (0.14.0)
+      language_server-protocol (~> 3.17.0)
+      prism (>= 0.19.0, < 0.22)
+      sorbet-runtime (>= 0.5.10782)
+    ruby-lsp-rails (0.2.10)
+      actionpack (>= 6.0)
+      activerecord (>= 6.0)
+      railties (>= 6.0)
+      ruby-lsp (>= 0.14.0, < 0.15.0)
+      sorbet-runtime (>= 0.5.9897)
+    ruby-lsp-rspec (0.1.10)
+      ruby-lsp (~> 0.14.0)
     ruby2_keywords (0.0.5)
+    sorbet-runtime (0.5.11255)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -272,6 +287,8 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.1.3)
   rspec-rails (~> 6.1)
+  ruby-lsp-rails
+  ruby-lsp-rspec
   sprockets-rails
   stimulus-rails
   turbo-rails
