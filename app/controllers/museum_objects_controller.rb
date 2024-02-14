@@ -8,14 +8,14 @@ class MuseumObjectsController < ApplicationController
   def index
     @museum_objects = MuseumObject.all
   end
-  
+
   def search
     @museum_object = MuseumObject.new
 
     response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{params[:system_number]}", format: :plain)
 
     if response.success?
-      @result = JSON.parse response.body, symbolize_names: true, object_class: OpenStruct
+      @result = JSON.parse response.body, object_class: OpenStruct
     else
       @museum_objects = MuseumObject.all
       flash.now[:alert] = "Object not found"
@@ -29,6 +29,14 @@ class MuseumObjectsController < ApplicationController
     if @museum_object.save
       redirect_to root_path, notice: "Object saved successfully", status: :see_other
     else
+      response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{params[:museum_object][:system_number]}", format: :plain)
+      if response.success?
+        @result = JSON.parse response.body, object_class: OpenStruct
+      else
+        flash[:alert] = "Object could not be saved"
+        redirect_back(fallback_location: root_path)
+        return
+      end
       flash.now[:alert] = "Object could not be saved"
       render :search, status: :unprocessable_entity
     end

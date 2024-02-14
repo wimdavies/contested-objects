@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "museum_objects#index"
 
-  resources :museum_objects, only: [:index, :create]
-  get '/search', to: "museum_objects#search", as: :search
+  resources :museum_objects, only: [:index, :create] do
+    collection do
+      get 'search'
+    end
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
