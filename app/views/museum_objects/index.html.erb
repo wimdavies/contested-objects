@@ -11,7 +11,7 @@
 <ul>
   <% @museum_objects.each do |museum_object| %>
   <li>
-    <%= museum_object.system_number %>
+    <%= link_to museum_object.system_number, museum_object_path(museum_object.system_number) %>
   </li>
   <% end %>
 </ul>

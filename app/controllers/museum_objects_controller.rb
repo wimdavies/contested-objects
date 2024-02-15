@@ -9,6 +9,21 @@ class MuseumObjectsController < ApplicationController
     @museum_objects = MuseumObject.all
   end
 
+  def show
+    @museum_object = MuseumObject.find_by!(system_number: params[:system_number])
+
+    response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{@museum_object.system_number}", format: :plain)
+    if response.success?
+      @result = JSON.parse response.body, object_class: OpenStruct
+    else
+      @museum_objects = MuseumObject.all
+      flash.now[:alert] = "Object not found"
+      render :index, status: :not_found
+    end
+  rescue ActiveRecord::RecordNotFound
+    redirect_to root_path, alert: "Object not found"
+  end
+
   def search
     @museum_object = MuseumObject.new
 
@@ -27,7 +42,7 @@ class MuseumObjectsController < ApplicationController
     @museum_object = MuseumObject.new(museum_object_params)
 
     if @museum_object.save
-      redirect_to root_path, notice: "Object saved successfully", status: :see_other
+      redirect_to museum_object_path(@museum_object.system_number), notice: "Object saved successfully"
     else
       response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{params[:museum_object][:system_number]}", format: :plain)
       if response.success?
