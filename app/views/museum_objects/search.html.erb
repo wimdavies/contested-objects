@@ -13,6 +13,7 @@
 <% end %>
 
 <% unless @result.nil? %>
+  <h2><%= @result.record.titles.empty? ? @result.record.objectType : @result.record.titles[0].title %></h2>
   <dl>
     <dt>System number</dt>
     <dd>
