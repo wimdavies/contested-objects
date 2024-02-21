@@ -141,16 +141,6 @@ GEM
     net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.0)
-    nokogiri (1.16.2-aarch64-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.2-arm-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.2-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.2-x86-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.2-x86_64-darwin)
-      racc (~> 1.4)
     nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     pg (1.5.4)
@@ -225,7 +215,7 @@ GEM
       language_server-protocol (~> 3.17.0)
       prism (>= 0.19.0, < 0.22)
       sorbet-runtime (>= 0.5.10782)
-    ruby-lsp-rails (0.2.10)
+    ruby-lsp-rails (0.3.0)
       actionpack (>= 6.0)
       activerecord (>= 6.0)
       railties (>= 6.0)
@@ -270,11 +260,6 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
-  aarch64-linux
-  arm-linux
-  arm64-darwin
-  x86-linux
-  x86_64-darwin
   x86_64-linux
 
 DEPENDENCIES
