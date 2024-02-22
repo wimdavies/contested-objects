@@ -10,6 +10,10 @@ class VandaClient
 
   def self.retrieve_single_object_record(system_number)
     response = self.get("/museumobject/#{system_number}")
+
+    if response.success?
+      response
+    end
     # JSON.parse(response.deep_transform_keys(&:underscore).to_json, object_class: OpenStruct)
   end
 end
