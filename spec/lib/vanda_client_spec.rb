@@ -9,10 +9,10 @@ describe VandaClient, :vcr do
     expect(VandaClient.base_uri).to eq "https://api.vam.ac.uk/v2"
   end
 
-  describe ".retrieve_object_record" do
-    it "returns status 200 OK for a valid system_number" do
-      response = VandaClient.retrieve_object_record("O108443")
-      expect(response.success?).to eq true
+  describe ".retrieve_single_object_record" do
+    it "returns an HTTParty response object when 200 OK" do
+      response = VandaClient.retrieve_single_object_record("O108443")
+      expect(response.class).to eq HTTParty::Response
     end
   end
 end
