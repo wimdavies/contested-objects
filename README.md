@@ -1,4 +1,8 @@
-# README
+# Contested Objects
+
+This work-in-progress project aims to offer users the opportunity to explore 'contested' objects in the V&A collection, and to engage with these objects through the lens of deaccession and return.
+
+## Rails readme boilerplate
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
