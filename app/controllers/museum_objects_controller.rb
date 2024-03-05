@@ -1,5 +1,4 @@
-require "httparty"
-require "json"
+require "clients/vanda_client"
 require "ostruct"
 
 class MuseumObjectsController < ApplicationController
@@ -12,7 +11,7 @@ class MuseumObjectsController < ApplicationController
   def show
     @museum_object = MuseumObject.find_by!(system_number: params[:system_number])
 
-    response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{@museum_object.system_number}", format: :plain)
+    response = VandaClient.retrieve_single_object_record(@museum_object.system_number)
     if response.success?
       @result = JSON.parse response.body, object_class: OpenStruct
     else
@@ -27,7 +26,8 @@ class MuseumObjectsController < ApplicationController
   def search
     @museum_object = MuseumObject.new
 
-    response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{params[:system_number]}", format: :plain)
+    response = VandaClient.retrieve_single_object_record(params[:system_number])
+    # response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{params[:system_number]}", format: :plain)
 
     if response.success?
       @result = JSON.parse response.body, object_class: OpenStruct
@@ -44,7 +44,8 @@ class MuseumObjectsController < ApplicationController
     if @museum_object.save
       redirect_to museum_object_path(@museum_object.system_number), notice: "Object saved successfully"
     else
-      response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{params[:museum_object][:system_number]}", format: :plain)
+      response = VandaClient.retrieve_single_object_record(params[:museum_object][:system_number])
+      # response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{params[:museum_object][:system_number]}", format: :plain)
       if response.success?
         @result = JSON.parse response.body, object_class: OpenStruct
       else
