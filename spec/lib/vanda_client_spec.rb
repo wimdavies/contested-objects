@@ -25,6 +25,11 @@ describe VandaClient, :vcr do
       expect(response.ok?).to eq true
     end
 
+    it "returns response with initially parsed JSON body for valid existing record" do
+      response = VandaClient.retrieve_single_object_record("O108443")
+      expect(response["record"]["systemNumber"]).to eq "O108443"
+    end
+
     it "returns status 404 for valid, non-extant record" do
       response = VandaClient.retrieve_single_object_record("O99999999")
       expect(response.not_found?).to eq true
