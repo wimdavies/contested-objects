@@ -6,5 +6,10 @@ describe VandaCollection::Wrapper, :vcr do
       object_record = VandaCollection::Wrapper.find_by_system_number("O108443")
       expect(object_record).to be_an_instance_of OpenStruct
     end
+
+    it "returns data accessible via dot operator + snake_cased attribute" do
+      object_record = VandaCollection::Wrapper.find_by_system_number("O108443")
+      expect(object_record.record.system_number).to eq "O108443"
+    end
   end
 end
