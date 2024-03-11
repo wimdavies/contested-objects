@@ -1,3 +1,4 @@
+require_relative "client"
 require "ostruct"
 
 module VandaCollection
