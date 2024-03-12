@@ -13,7 +13,8 @@ module VandaCollection
     def self.retrieve_single_object_record(system_number)
       raise ArgumentError.new("System number must be in valid format") unless system_number =~ SYSTEM_NUMBER_FORMAT
   
-      self.get("/museumobject/#{system_number}")
+      response = self.get("/museumobject/#{system_number}")
+      response.parsed_response if response.success?
     end
   end
 end
