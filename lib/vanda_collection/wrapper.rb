@@ -7,13 +7,19 @@ module VandaCollection
       response = VandaCollection::Client.retrieve_single_object_record(system_number)
 
       if response.success?
-        JSON.parse(response.deep_transform_keys(&:underscore).to_json, object_class: OpenStruct)
+        parse_single_object_record(response)
       else
         # current plan is to return nil for status code other than 200 OK
         nil
       end
     # rescue
     #   # error handling goes here
+    end
+
+    private
+
+    def parse_single_object_record(response)
+      JSON.parse(response.deep_transform_keys(&:underscore).to_json, object_class: OpenStruct)
     end
   end
 end
