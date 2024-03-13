@@ -1,8 +1,5 @@
-require "httparty"
-require "active_support"
-require "active_support/core_ext/hash/keys"
-require "active_support/core_ext/string/inflections"
 require_relative "error"
+require "httparty"
 
 module VandaCollection
   class Client
