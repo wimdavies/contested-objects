@@ -20,14 +20,14 @@ describe VandaCollection::Client, :vcr do
       expect(response["record"]["systemNumber"]).to eq "O108443"
     end
     
-    it "raises custom ArgumentError if passed an invalid system number" do
+    it "raises SystemNumberFormatError if passed an invalid system number" do
       expect { VandaCollection::Client.retrieve_single_object_record("bananas") }
-        .to raise_error(an_instance_of(ArgumentError).and having_attributes({"message" => "System number must be in valid format"}))
+        .to raise_error(VandaCollection::SystemNumberFormatError, "System number 'bananas' must be in valid format")
     end
 
-    xit "returns status 404 for valid, non-extant record" do
-      response = VandaCollection::Client.retrieve_single_object_record("O99999999")
-      expect(response.not_found?).to eq true
+    it "raises NotFoundError for valid, non-extant record" do
+      expect { VandaCollection::Client.retrieve_single_object_record("O99999999") }
+        .to raise_error(VandaCollection::NotFoundError, "Client received response status code 404")
     end
   end
 end
