@@ -12,7 +12,10 @@ module VandaCollection
       raise SystemNumberFormatError, "System number '#{system_number}' must be in valid format" unless system_number =~ SYSTEM_NUMBER_FORMAT
   
       response = self.get("/museumobject/#{system_number}")
+      handle_response_status(response)
+    end
 
+    private_class_method def self.handle_response_status(response)
       case response.code
       when 200
         response.parsed_response
