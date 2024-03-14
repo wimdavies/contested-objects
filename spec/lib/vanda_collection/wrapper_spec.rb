@@ -11,5 +11,10 @@ describe VandaCollection::Wrapper, :vcr do
       object_record = VandaCollection::Wrapper.find_by_system_number("O108443")
       expect(object_record.record.system_number).to eq "O108443"
     end
+
+    it "returns nil for a valid, non-extant system_number" do
+      object_record = VandaCollection::Wrapper.find_by_system_number("O99999999")
+      expect(object_record).to eq nil
+    end
   end
 end
