@@ -29,5 +29,12 @@ describe VandaCollection::Client, :vcr do
       expect { VandaCollection::Client.retrieve_single_object_record("O99999999") }
         .to raise_error(VandaCollection::NotFoundError, "Client received response status code 404")
     end
+
+    # NB: this test passes by virtue of having edited the VCR cassette's status code.
+    #     It will fail in any environment that does not contain this edited cassette.
+    it "raises ResponseStatusCodeError for other non-200 status codes" do
+      expect { VandaCollection::Client.retrieve_single_object_record("O99999999") }
+        .to raise_error(VandaCollection::ResponseStatusCodeError, "Client received response status code 422")
+    end
   end
 end

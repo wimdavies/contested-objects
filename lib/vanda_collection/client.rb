@@ -12,10 +12,14 @@ module VandaCollection
       raise SystemNumberFormatError, "System number '#{system_number}' must be in valid format" unless system_number =~ SYSTEM_NUMBER_FORMAT
   
       response = self.get("/museumobject/#{system_number}")
-      if response.success?
-        response.parsed_response      
-      elsif response.not_found?
-        raise NotFoundError, "Client received response status code #{response.code}"
+
+      case response.code
+      when 200
+        response.parsed_response
+      when 404
+        raise NotFoundError, "Client received response status code 404"
+      else
+        raise ResponseStatusCodeError, "Client received response status code #{response.code}"
       end
     end
   end
