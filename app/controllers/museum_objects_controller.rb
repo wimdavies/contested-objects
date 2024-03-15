@@ -19,12 +19,8 @@ class MuseumObjectsController < ApplicationController
   def search
     @museum_object = MuseumObject.new
 
-    response = VandaClient.retrieve_single_object_record(params[:system_number])
-    # response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{params[:system_number]}", format: :plain)
-
-    if response.success?
-      @result = JSON.parse response.body, object_class: OpenStruct
-    else
+    @vanda_object = VandaCollection::Wrapper.find_by_system_number(params[:system_number])
+    unless @vanda_object
       @museum_objects = MuseumObject.all
       flash.now[:alert] = "Object not found"
       render :index, status: :not_found

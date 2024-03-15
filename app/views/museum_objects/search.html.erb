@@ -8,51 +8,8 @@
       <% end %>
     </div>
   <% end %>
-  <%= form.hidden_field :system_number, value: @result.record.systemNumber %>
+  <%= form.hidden_field :system_number, value: @vanda_object.record.systemNumber %>
   <%= form.submit "Save this object" %>
 <% end %>
 
-<% unless @result.nil? %>
-  <h2><%= @result.record.titles.empty? ? @result.record.objectType : @result.record.titles[0].title %></h2>
-  <dl>
-    <dt>System number</dt>
-    <dd>
-      <%= @result.record.systemNumber %>
-    </dd>
-
-    <dt>Title</dt>
-    <dd>
-      <%= @result.record.titles.empty? ? "n/a" : @result.record.titles[0].title %>
-    </dd>
-
-    <dt>Object type</dt>
-    <dd>
-      <%= @result.record.objectType %>
-    </dd>
-
-    <dt>Summary description</dt>
-    <dd>
-      <%= sanitize @result.record.summaryDescription %>
-    </dd>
-
-    <dt>Physical description</dt>
-    <dd>
-      <%= sanitize @result.record.physicalDescription %>
-    </dd>
-
-    <dt>Thumbnail</dt>
-    <dd>
-      <%= @result.meta.images.nil? ? "n/a" : image_tag(@result.meta.images._primary_thumbnail, alt: "Thumbnail") %>
-    </dd>
-
-    <dt>Artist/Maker</dt>
-    <dd>
-      <%= @result.record.artistMakerPerson.empty? ? "n/a" : @result.record.artistMakerPerson[0].name.text %>
-    </dd>
-
-    <dt>Date</dt>
-    <dd>
-      <%= @result.record.productionDates.empty? ? "n/a" : @result.record.productionDates[0].date.text %>
-    </dd>
-  </dl>
-<% end %>
+<%= render "vanda_object" %>
