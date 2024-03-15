@@ -1,9 +1,4 @@
-require "clients/vanda_client"
-require "ostruct"
-
 class MuseumObjectsController < ApplicationController
-  include HTTParty
-
   def index
     @museum_objects = MuseumObject.all
   end
@@ -11,10 +6,8 @@ class MuseumObjectsController < ApplicationController
   def show
     @museum_object = MuseumObject.find_by!(system_number: params[:system_number])
 
-    response = VandaClient.retrieve_single_object_record(@museum_object.system_number)
-    if response.success?
-      @result = JSON.parse response.body, object_class: OpenStruct
-    else
+    @vanda_object = VandaCollection::Wrapper.find_by_system_number(@museum_object.system_number)
+    unless @vanda_object
       @museum_objects = MuseumObject.all
       flash.now[:alert] = "Object not found"
       render :index, status: :not_found
