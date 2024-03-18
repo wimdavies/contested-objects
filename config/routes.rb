@@ -11,6 +11,11 @@ Rails.application.routes.draw do
   end
   resources :museum_objects, only: :show, param: :system_number, system_number: /O\d+/
 
+  resource :session
+  resource :registration
+  resource :password_reset
+  resource :password
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
