@@ -21,7 +21,7 @@
     
     <% if flash.any? %>
       <% flash.each do |type, msg| %>
-        <div>
+        <div data-turbo-temporary>
           <%= msg %>
         </div>
       <% end %>
