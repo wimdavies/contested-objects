@@ -1,21 +1,21 @@
 <nav>
   <ul>
     <li>
-      <%= link_to "Home", root_path %>
+      <%= link_to("Home", root_path, aria: { current: (current_page?(root_path) ? "page" : nil) }) %>
     </li>
     <% if user_signed_in? %>
       <li>
-        <%= link_to "Edit password", edit_password_path %>
+        <%= link_to("Edit password", edit_password_path, aria: { current: (current_page?(edit_password_path) ? "page" : nil) }) %>
       </li>
       <li>
         <%= button_to "Log out", session_path, method: :delete %>
       </li>
     <% else %>
       <li>
-        <%= link_to "Sign up", new_registration_path %>
+        <%= link_to("Sign up", new_registration_path, aria: { current: (current_page?(new_registration_path) ? "page" : nil) }) %>
       </li>
       <li>
-        <%= link_to "Log in", new_session_path %>
+        <%= link_to("Log in", new_session_path, aria: { current: (current_page?(new_session_path) ? "page" : nil) }) %>
       </li>
     <% end %>
   </ul>
