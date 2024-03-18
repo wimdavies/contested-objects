@@ -33,11 +33,8 @@ class MuseumObjectsController < ApplicationController
     if @museum_object.save
       redirect_to museum_object_path(@museum_object.system_number), notice: "Object saved successfully"
     else
-      response = VandaClient.retrieve_single_object_record(params[:museum_object][:system_number])
-      # response = HTTParty.get("https://api.vam.ac.uk/v2/museumobject/#{params[:museum_object][:system_number]}", format: :plain)
-      if response.success?
-        @result = JSON.parse response.body, object_class: OpenStruct
-      else
+      @vanda_object = VandaCollection::Wrapper.find_by_system_number(params[:museum_object][:system_number])
+      unless @vanda_object
         flash[:alert] = "Object could not be saved"
         redirect_back(fallback_location: root_path)
         return
