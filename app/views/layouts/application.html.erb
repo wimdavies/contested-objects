@@ -11,29 +11,6 @@
   </head>
 
   <body>
-    <nav>
-      <ul>
-        <li>
-          <%= link_to "Home", root_path %>
-        </li>
-        <% if user_signed_in? %>
-          <li>
-            <%= link_to "Edit password", edit_password_path %>
-          </li>
-          <li>
-            <%= button_to "Log out", session_path, method: :delete %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to "Sign up", new_registration_path %>
-          </li>
-          <li>
-            <%= link_to "Log in", new_session_path %>
-          </li>
-        <% end %>
-      </ul>
-    </nav>
-    
     <% if flash.any? %>
       <% flash.each do |type, msg| %>
         <div data-turbo-temporary>
@@ -42,6 +19,8 @@
       <% end %>
     <% end %>
 
+    <%= render "shared/navbar" %>
+    
     <%= yield %>
   </body>
 </html>
