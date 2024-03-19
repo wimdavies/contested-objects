@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :reflections
+  has_many :museum_objects, through: :reflections
+
   validates :name, presence: :true, length: { maximum: 50 }
   validates :email, presence: :true, format: { with: URI::MailTo::EMAIL_REGEXP }
   normalizes :email, with: -> name { name.strip }
