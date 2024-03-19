@@ -13,6 +13,8 @@ module VandaCollection
   
       response = self.get("/museumobject/#{system_number}")
       handle_response_status(response)
+    rescue ClientError => error
+      raise error
     rescue StandardError => error
       raise ClientError, "Client encountered an error: #{error.class}: #{error.message}"
     end
