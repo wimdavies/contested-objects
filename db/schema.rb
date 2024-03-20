@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_19_171200) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_20_163007) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_171200) do
     t.text "absence_feelings"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "museum_object_id", null: false
+    t.index ["museum_object_id"], name: "index_reflections_on_museum_object_id"
+    t.index ["user_id"], name: "index_reflections_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -39,4 +43,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_171200) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "reflections", "museum_objects"
+  add_foreign_key "reflections", "users"
 end
