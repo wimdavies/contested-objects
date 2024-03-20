@@ -1,6 +1,6 @@
 <h1>Write a reflection</h1>
 
-<%= form_with model: @reflection do |form| %>
+<%= form_with model: [@museum_object, @museum_object.reflections.build ], url: reflections_path do |form| %>
   <% if form.object.errors.any? %>
     <% form.object.errors.full_messages.each do |message| %>
       <div><%= message %></div>
