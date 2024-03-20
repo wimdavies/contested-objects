@@ -1,6 +1,12 @@
 <h1>Write a reflection</h1>
 
 <%= form_with model: @reflection do |form| %>
+  <% if form.object.errors.any? %>
+    <% form.object.errors.full_messages.each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  <% end %>
+
   <%= field_set_tag "Flag this object for deaccession?" do %>
     <%= form.radio_button :deaccession_flag, true, checked: true %>
     <%= form.label :deaccession_flag_true, "Yes" %>
