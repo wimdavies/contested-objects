@@ -5,9 +5,8 @@ Rails.application.routes.draw do
   root "museum_objects#index"
 
   resources :museum_objects, only: [:index, :create] do
-    collection do
-      get 'search'
-    end
+    get 'search', on: :collection
+    resources :reflections, shallow: true
   end
   resources :museum_objects, only: :show, param: :system_number, system_number: /O\d+/
 
