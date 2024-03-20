@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "museum_objects#index"
 
-  resources :museum_objects, only: [:index, :create] do
+  resources :museum_objects, only: [:index, :create, :show], param: :system_number, system_number: /O\d+/ do
     get 'search', on: :collection
-    resources :reflections, shallow: true
+    member do
+      resources :reflections, shallow: true
+    end
   end
-  resources :museum_objects, only: :show, param: :system_number, system_number: /O\d+/
 
   resource :session
   resource :registration
