@@ -3,6 +3,8 @@ class ReflectionsController < ApplicationController
   end
 
   def new
+    @reflection = Reflection.new
+    @vanda_object = VandaCollection::Wrapper.find_by_system_number(params[:system_number])
   end
 
   def create
