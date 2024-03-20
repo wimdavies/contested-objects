@@ -1,3 +1,26 @@
 <h1>Write a reflection</h1>
 
+<%= form_with model: @reflection do |form| %>
+  <%= field_set_tag "Flag this object for deaccession?" do %>
+    <%= form.radio_button :deaccession_flag, true, checked: true %>
+    <%= form.label :deaccession_flag_true, "Yes" %>
+    <%= form.radio_button :deaccession_flag, false %>
+    <%= form.label :deaccession_flag_false, "No" %>
+  <% end %>
+
+  <%= form.label :deaccession_reason, "If yes, why do you think it should leave the collection?" %> <br>
+  <%= form.text_area :deaccession_reason %> <br>
+
+  <%= form.label :provenance_thoughts, "What do you think about this object's provenance?" %> <br>
+  <%= form.text_area :provenance_thoughts %> <br>
+
+  <%= form.label :presence_feelings, "How do you feel about this object's presence in the collection?" %> <br>
+  <%= form.text_area :presence_feelings %> <br>
+
+  <%= form.label :absence_feelings, "How would you feel about this object leaving the collection?" %> <br>
+  <%= form.text_area :absence_feelings %> <br>
+
+  <%= form.submit "Save"%>
+<% end %>
+
 <%= render "museum_objects/vanda_object" %>
