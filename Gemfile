@@ -54,6 +54,11 @@ group :development, :test do
   gem "vcr", "~> 6.2"
 end
 
+group :test do
+  gem "capybara"
+  gem "selenium-webdriver"
+end
+
 group :development do
   gem "ruby-lsp-rspec", require: false
   # Use console on exceptions pages [https://github.com/rails/web-console]
