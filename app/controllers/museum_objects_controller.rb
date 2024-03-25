@@ -29,6 +29,12 @@ class MuseumObjectsController < ApplicationController
 
   def create
     @museum_object = MuseumObject.new(museum_object_params)
+    # Assign MuseumObject a name from the API result primary title or object type if no title.
+    # Will throw error if system number invalid, which devalues subsequent control flow.
+    # TODO: integrate this into forthcoming Service
+    vanda_object = VandaCollection::Wrapper.find_by_system_number(@museum_object.system_number)
+    object_name = vanda_object.record.titles[0].title.presence || vanda_object.record.object_type
+    @museum_object.update(name: object_name)
 
     if @museum_object.save
       redirect_to museum_object_path(@museum_object.system_number), notice: "Object saved successfully"
