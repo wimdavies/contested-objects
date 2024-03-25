@@ -1,2 +1,35 @@
-<h1>Reflections#show</h1>
-<p>Find me in app/views/reflections/show.html.erb</p>
+<h1>A reflection by <%= @user.name %> on <%= @museum_object.name %></h1>
+
+<h3> <%= @reflection.deaccession_flag ? "Flagged" : "Not flagged" %> for deaccession from the collection </h3>
+
+<dl>
+  <% if @reflection.deaccession_reason.present? %>
+    <dt>Why do you think it should leave the collection?</dt>
+    <dd>
+      <%= @reflection.deaccession_reason %>
+    </dd>
+  <% end %>
+
+  <% if @reflection.provenance_thoughts.present? %>
+    <dt>What do you think about this object's provenance?</dt>
+    <dd>
+      <%= @reflection.provenance_thoughts %>
+    </dd>
+  <% end %>
+
+  <% if @reflection.presence_feelings.present? %>
+    <dt>How do you feel about this object's presence in the collection?</dt>
+    <dd>
+      <%= @reflection.presence_feelings %>
+    </dd>
+  <% end %>
+
+  <% if @reflection.absence_feelings.present? %>
+    <dt>How would you feel about this object leaving the collection?</dt>
+    <dd>
+      <%= @reflection.absence_feelings %>
+    </dd>
+  <% end %>
+</dl>
+
+<%= render "museum_objects/vanda_object" %>

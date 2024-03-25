@@ -25,6 +25,10 @@ class ReflectionsController < ApplicationController
   end
 
   def show
+    @reflection = Reflection.find(params[:id])
+    @user = User.find(@reflection.user_id)
+    @museum_object = MuseumObject.find(@reflection.museum_object_id)
+    @vanda_object = VandaCollection::Wrapper.find_by_system_number(@museum_object.system_number)
   end
 
   def edit
